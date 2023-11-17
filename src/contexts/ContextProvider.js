@@ -1,33 +1,25 @@
 import Context from "./Context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 function ContextProvider(props) {
-  let [userLoggedIn, setToken] = useState(false);
+  let [UserData, setData] = useState([]);
 
-  let loggedInHandeler = async () => {
-    await fetch("https://hoblist.com/api/movieList", {
-      method: "POST",
-      body: JSON.stringify({
-        category: "movies",
-        language: "kannad",
-        genre: "all",
-        sort: "voting",
-      }),
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    setToken(true);
+  let getData = async () => {
+    let res = await fetch(
+      "https://greenie-assignment-default-rtdb.firebaseio.com/UserData.json"
+    );
+    let data = await res.json();
+    let x = [];
+    for (let key in data) {
+      x.push({ key, ...data[key] });
+    }
+    setData(x);
   };
-  let loggedOutHandeler = () => {
-    setToken(false);
-  };
+  useEffect(() => {
+    getData();
+  }, []);
 
   let context = {
-    isLoggedIn: userLoggedIn,
-    login: loggedInHandeler,
-    logout: loggedOutHandeler,
+    Data: UserData,
   };
   return <Context.Provider value={context}>{props.children}</Context.Provider>;
 }

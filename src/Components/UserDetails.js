@@ -1,15 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import "./UserDetails.css";
+import Context from "../contexts/Context";
+
 function UserDetails() {
-  const [userData, setUserData] = useState([]);
+  let context = useContext(Context);
+  let [filterdata, setData] = useState([]);
+  let data = context.Data;
 
-  useEffect(() => {});
+  let serachR = useRef();
 
+  function search() {
+    let data1 = data.filter((e) => {
+      return e.mail === serachR.current.value;
+    });
+    setData(data1);
+  }
   return (
     <div>
       <div className="search">
-        <input />
-        <button>Search</button>
+        <input ref={serachR} />
+        <button onClick={search}>Search</button>
       </div>
       <div>
         <table id="userTable">
@@ -18,14 +28,35 @@ function UserDetails() {
               <th>User ID</th>
               <th>Username</th>
               <th>Email</th>
+              <th>Show Deatails</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>JohnDoe</td>
-              <td>john@example.com</td>
-            </tr>
+            {filterdata.length > 0
+              ? filterdata.map((e, i) => {
+                  return (
+                    <tr>
+                      <td>{i}</td>
+                      <td>{e.username}</td>
+                      <td>{e.mail}</td>
+                      <td>
+                        <button>View</button>
+                      </td>
+                    </tr>
+                  );
+                })
+              : data.map((e, i) => {
+                  return (
+                    <tr>
+                      <td>{i}</td>
+                      <td>{e.username}</td>
+                      <td>{e.mail}</td>
+                      <td>
+                        <button>View</button>
+                      </td>
+                    </tr>
+                  );
+                })}
           </tbody>
         </table>
       </div>

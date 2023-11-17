@@ -20,6 +20,10 @@ function AccountCreation() {
         }),
       }
     );
+    mailR.current.value = "";
+    nameR.current.value = "";
+    mobileR.current.value = "";
+    passwordR.current.value = "";
   };
 
   return (

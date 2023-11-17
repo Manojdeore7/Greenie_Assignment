@@ -1,8 +1,6 @@
-import react, { useState } from "react";
+import react from "react";
 let AuthContext = react.createContext({
-  isLoggedIn: false,
-  login: () => {},
-  logout: () => {},
+  Data: [],
 });
 
 export default AuthContext;

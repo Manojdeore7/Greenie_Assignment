@@ -1,18 +1,15 @@
 import React from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 function Header() {
   return (
-    <div class="tabs">
-      <button
-        class="tablink"
-        onclick="openTab(event, 'userDetails')"
-        id="defaultOpen"
-      >
+    <div className="tabs">
+      <Link to="/" className="tablink" id="defaultOpen">
         User Details
-      </button>
-      <button class="tablink" onclick="openTab(event, 'accountCreation')">
+      </Link>
+      <Link to="/account-creation" className="tablink">
         Account Creation
-      </button>
+      </Link>
     </div>
   );
 }
