@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import Context from "../contexts/Context";
 import "./AccountCreation.css";
 function AccountCreation() {
+  let context = useContext(Context);
   let nameR = useRef();
   let mailR = useRef();
   let mobileR = useRef();
@@ -24,6 +25,7 @@ function AccountCreation() {
     nameR.current.value = "";
     mobileR.current.value = "";
     passwordR.current.value = "";
+    context.refresh();
   };
 
   return (

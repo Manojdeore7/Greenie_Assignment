@@ -14,12 +14,16 @@ function ContextProvider(props) {
     }
     setData(x);
   };
+  function refresh() {
+    getData();
+  }
   useEffect(() => {
     getData();
   }, []);
 
   let context = {
     Data: UserData,
+    refresh: refresh,
   };
   return <Context.Provider value={context}>{props.children}</Context.Provider>;
 }

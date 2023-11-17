@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import "./UserDetails.css";
 import Context from "../contexts/Context";
-
+import { Link } from "react-router-dom";
 function UserDetails() {
   let context = useContext(Context);
   let [filterdata, setData] = useState([]);
@@ -34,25 +34,27 @@ function UserDetails() {
           <tbody>
             {filterdata.length > 0
               ? filterdata.map((e, i) => {
+                  let str = `./${e.key}`;
                   return (
                     <tr>
                       <td>{i}</td>
                       <td>{e.username}</td>
                       <td>{e.mail}</td>
                       <td>
-                        <button>View</button>
+                        <Link to={str}>View</Link>
                       </td>
                     </tr>
                   );
                 })
               : data.map((e, i) => {
+                  let str = `./${e.key}`;
                   return (
                     <tr>
                       <td>{i}</td>
                       <td>{e.username}</td>
                       <td>{e.mail}</td>
                       <td>
-                        <button>View</button>
+                        <Link to={str}>View</Link>
                       </td>
                     </tr>
                   );
